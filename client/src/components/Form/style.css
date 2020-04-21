@@ -1,3 +1,11 @@
+h1 {
+    color: white;
+}
+
+h5 {
+    color: #454545;
+}
+
 form {
     width: 90%;
     margin: auto;
@@ -23,8 +31,17 @@ form .form-group input {
 
 form .btn {
     border-radius: 0 24px 24px 0;
+    background-color: #F4B400;
+    border-color: #F4B400;
 }
 
 form .btn i {
     margin: 0 1em;
+    background-color: #F4B400;
+}
+
+.btn-success:hover {
+    background-color: #F4B400;
+    border-color: #F4B400;
+    color: #454545;
 }
