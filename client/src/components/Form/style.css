@@ -39,9 +39,14 @@ form .btn i {
     margin: 0 1em;
     background-color: #F4B400;
 }
+.btn-success {
+    background-color: #F4B400;
+    border-color: #F4B400;
+    color: #454545;
+}
 
 .btn-success:hover {
     background-color: #F4B400;
     border-color: #F4B400;
-    color: #454545;
+    color: white;
 }

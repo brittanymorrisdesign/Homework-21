@@ -87,7 +87,7 @@ function Search() {
                           handleSaveSubmit={handleSaveSubmit}
                           bookData={book}
                         >
-                          Save <i className="fas fa-bookmark"></i>
+                          <i className="far fa-heart"></i>
                         </SaveBtn>
                         <ViewBtn
                           link={book.link}
