@@ -56,7 +56,7 @@ function Search() {
         <Row>
           <div className="hero">
             <Jumbotron>
-              <h1>React Google Books Search</h1>
+              <h1>Google Book Search</h1>
               <h5>Search & Save from Google Books API</h5>
             </Jumbotron>
           </div>
@@ -65,7 +65,7 @@ function Search() {
               <Input
                 onChange={handleInputChange}
                 name="title"
-                style={{ textAlign: "center", width: 500, }}
+                style={{ textAlign: "center" }}
                 placeholder='For example, "Catcher In The Rye"'
               />
               <FormBtn
