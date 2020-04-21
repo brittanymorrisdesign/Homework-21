@@ -1,110 +1,109 @@
 import React, { useState, useEffect } from "react";
-import DeleteBtn from "../../components/DeleteBtn/deleteBtn";
 import Jumbotron from "../../components/Jumbotron/";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
+import CardBody from "../../components/cardBody/cardBody";
+import Card from "../../components/Card/card"
+import SaveBtn from "../../components/saveBtn/saveBtn"
+import ViewBtn from "../../components/viewBtn/viewBtn"
 import { Col, Row, Container } from "../../components/Grid/";
 import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form/form";
+import { Input, FormBtn } from "../../components/Form/form";
 
-function Books() {
+function Search() {
   // Setting our component's initial state
   const [books, setBooks] = useState([])
-  const [formObject, setFormObject] = useState({})
-
-  // Load all books and store them with setBooks
-  useEffect(() => {
-    loadBooks()
-  }, [])
+  const [searchTerm, setSearchTerm] = useState("")
 
   // Loads all books and sets them to books
   function loadBooks() {
-    API.getBooks()
-      .then(res => 
-        setBooks(res.data)
+    API.getBookByTitle(searchTerm)
+      .then(res => {
+        setBooks(res)
+        }
       )
       .catch(err => console.log(err));
   };
 
-  // Deletes a book from the database with a given id, then reloads books from the db
-  function deleteBook(id) {
-    API.deleteBook(id)
-      .then(res => loadBooks())
-      .catch(err => console.log(err));
-  }
-
   // Handles updating component state when the user types into the input field
   function handleInputChange(event) {
-    const { name, value } = event.target;
-    setFormObject({...formObject, [name]: value})
+    const { value } = event.target;
+    setSearchTerm( value.replace(/\s/g, '') );
   };
 
   // When the form is submitted, use the API.saveBook method to save the book data
-  // Then reload books from the database
-  function handleFormSubmit(event) {
+  function handleSearchSubmit(event) {
     event.preventDefault();
-    if (formObject.title && formObject.author) {
-      API.saveBook({
-        title: formObject.title,
-        author: formObject.author,
-        synopsis: formObject.synopsis
-      })
-        .then(res => loadBooks())
-        .catch(err => console.log(err));
+    if (searchTerm) {
+      loadBooks();
     }
+  };
+  
+  function handleSaveSubmit(bookData) {
+    API.saveBook({
+      _id : bookData.id,
+      title: bookData.title,
+      authors: bookData.authors,
+      description: bookData.description,
+      image: bookData.image,
+      link: bookData.link
+    })
   };
 
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <div className="hero">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              <h1>React Google Books Search</h1>
+              <h5>Search For and Save Books of Interest</h5>
             </Jumbotron>
-            <form>
+          </div>
+          <Col size="md-12">
+            <form className="d-flex">
               <Input
                 onChange={handleInputChange}
                 name="title"
-                placeholder="Title (required)"
-              />
-              <Input
-                onChange={handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                onChange={handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
+                placeholder='For example, "Catcher In The Rye"'
               />
               <FormBtn
-                disabled={!(formObject.author && formObject.title)}
-                onClick={handleFormSubmit}
+                onClick={handleSearchSubmit}
               >
-                Submit Book
+                <i className="fas fa-search"></i>
               </FormBtn>
             </form>
           </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron>
-            {books.length ? (
+          <Col size="md-12">
+            <Card>
+              <h4 className="text-center">Search Results</h4>
+              {books.length >0? (
               <List>
                 {books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => deleteBook(book._id)} />
+                  <ListItem key={book.id}>
+                      <Card>
+                      <SaveBtn
+                          handleSaveSubmit={handleSaveSubmit}
+                          bookData={book}
+                        >
+                          Save <i className="fas fa-bookmark"></i>
+                        </SaveBtn>
+                        <ViewBtn
+                          link={book.link}
+                        />
+                        <CardBody
+                          key={book.id}
+                          title={book.title}
+                          authors={book.authors}
+                          image={book.image}
+                          description={book.description}
+                        />
+                      </Card>
                   </ListItem>
                 ))}
               </List>
             ) : (
-              <h3>No Results to Display</h3>
+              <p className="display-message text-center mt-5">No Results to Display</p>
             )}
+            </Card>
           </Col>
         </Row>
       </Container>
@@ -112,4 +111,4 @@ function Books() {
   }
 
 
-export default Books;
+export default Search;
