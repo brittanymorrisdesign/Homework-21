@@ -65,10 +65,11 @@ function Search() {
               <Input
                 onChange={handleInputChange}
                 name="title"
-                style={{ textAlign: "center" }}
+                style={{ textAlign: "center", backgroundColor: "rgb(232,240,254)" }}
                 placeholder='For example, "Catcher In The Rye"'
               />
               <FormBtn
+                style={{ textAlign: "center", backgroundColor: "rgb(232,240,254)" }}
                 onClick={handleSearchSubmit}
               >
                 <i className="fas fa-search"></i>

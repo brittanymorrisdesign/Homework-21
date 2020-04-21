@@ -8,6 +8,8 @@ import DeleteBtn from "../../components/DeleteBtn/deleteBtn";
 import ViewBtn from "../../components/viewBtn/viewBtn";
 import API from "../../utils/API";
 
+import "./styles.css"
+
 function Search() {
   // Setting our component's initial state
   const [books, setBooks] = useState([])

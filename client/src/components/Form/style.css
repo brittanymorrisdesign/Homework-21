@@ -39,6 +39,7 @@ form .btn i {
     margin: 0 1em;
     background-color: #F4B400;
 }
+
 .btn-success {
     background-color: #F4B400;
     border-color: #F4B400;
@@ -49,4 +50,8 @@ form .btn i {
     background-color: #F4B400;
     border-color: #F4B400;
     color: white;
+}
+
+.form-control {
+    box-shadow: none; /* Removes blue halo */
 }
