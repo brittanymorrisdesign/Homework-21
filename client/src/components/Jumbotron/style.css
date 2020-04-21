@@ -1,7 +1,7 @@
 .hero {
     width: 100%;
     clear: "both";
-    padding-top: 60px; 
+    padding-top: 50px; 
 }
 
 .jumbotron {
@@ -9,3 +9,6 @@
     background-color: #F4B400;
 }
 
+h1 {
+    font-size: 45px;
+}

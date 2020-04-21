@@ -5,6 +5,8 @@ import Saved from "./pages/Saved/saved";
 import NoMatch from "./pages/NoMatch/NoMatch";
 import Nav from "./components/Nav";
 
+import "./app.css"
+
 function App() {
   return (
     <Router>
