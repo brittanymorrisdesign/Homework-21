@@ -38,8 +38,8 @@ function Search() {
         <Row>
           <div className="hero">
             <Jumbotron>
-              <h1>Google Book Search</h1>
-              <h5>Search & Save Books</h5>
+              <h1>Google Books Search</h1>
+              <h5>from Google Books API</h5>
             </Jumbotron>
           </div>
           <Col size="md-12">
