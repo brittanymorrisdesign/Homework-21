@@ -16,7 +16,7 @@ function Search() {
 
   // Loads all books and sets them to books
   function loadBooks() {
-    API.getBookByTitle(searchTerm)
+    API.getBooksByTitle(searchTerm)
       .then(res => {
         setBooks(res)
         }

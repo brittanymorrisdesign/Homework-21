@@ -1,45 +1,75 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
+import { List, ListItem } from "../../components/List/";
 import Jumbotron from "../../components/Jumbotron/";
+import CardBody from "../../components/cardBody/cardBody";
+import Card from "../../components/Card/card";
+import DeleteBtn from "../../components/DeleteBtn/deleteBtn";
+import ViewBtn from "../../components/viewBtn/viewBtn";
 import API from "../../utils/API";
 
-function Detail(props) {
-  const [book, setBook] = useState({})
+function Search() {
+  // Setting our component's initial state
+  const [books, setBooks] = useState([])
 
-  // When this component mounts, grab the book with the _id of props.match.params.id
-  // e.g. localhost:3000/books/599dcb67f0f16317844583fc
-  const {id} = useParams()
+  // Load all books from database
   useEffect(() => {
-    API.getBook(id)
-      .then(res => setBook(res.data))
+    API.getBooks()
+    .then(res => 
+        setBooks(res.data)
+      )
       .catch(err => console.log(err));
   }, [])
 
-  return (
+  // Deletes a book from the database with a given id, then reloads books from the db
+  function handleDeleteSubmit(id) {
+    API.deleteBook(id)
+  
+    // Filter
+    setBooks(books.filter((book) => {
+        return book._id != id;
+    }))
+  }
+
+    return (
       <Container fluid>
         <Row>
-          <Col size="md-12">
+          <div className="hero">
             <Jumbotron>
-              <h1>
-                {book.title} by {book.author}
-              </h1>
+              <h1>Google Book Search</h1>
+              <h5>Search & Save Books</h5>
             </Jumbotron>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-10 md-offset-1">
-            <article>
-              <h1>Synopsis</h1>
-              <p>
-                {book.synopsis}
-              </p>
-            </article>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-2">
-            <Link to="/">← Back to Authors</Link>
+          </div>
+          <Col size="md-12">
+            <Card>
+              <h4 className="text-center">Saved Books</h4>
+              {books.length >0? (
+              <List> 
+                {books.map(book => (
+                  <ListItem key={book.id}>
+                      <Card>
+                      <DeleteBtn
+                          handleDeleteSubmit={handleDeleteSubmit}
+                          id={book._id}
+                        />
+                        <ViewBtn
+                          link={book.link}
+                        />
+                        <CardBody
+                          key={book.id}
+                          title={book.title}
+                          authors={book.authors}
+                          image={book.image}
+                          description={book.description}
+                        />
+                      </Card>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <p className="display-message text-center mt-5">Nothing Saved Yet</p>
+            )}
+            </Card>
           </Col>
         </Row>
       </Container>
@@ -47,4 +77,4 @@ function Detail(props) {
   }
 
 
-export default Detail;
+export default Search;
