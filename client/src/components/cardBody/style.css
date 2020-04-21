@@ -37,4 +37,9 @@
 
   .description {
     font-size: 14px;
+    width: 60%;
+  }
+
+  .card-img {
+    width: 85%;
   }
