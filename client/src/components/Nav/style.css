@@ -1,0 +1,25 @@
+.navbar-container {
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
+}
+
+.navbar {
+    max-width: 960px;
+    margin: auto;
+}
+
+.logo {
+    font-weight: normal;
+    margin: 0;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    opacity: .5;
+}
