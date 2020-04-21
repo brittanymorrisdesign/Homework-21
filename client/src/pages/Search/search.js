@@ -9,6 +9,8 @@ import { Col, Row, Container } from "../../components/Grid/";
 import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form/form";
 
+import "../../pages/Search/styles.css"
+
 function Search() {
   // Setting our component's initial state
   const [books, setBooks] = useState([])
@@ -55,7 +57,7 @@ function Search() {
           <div className="hero">
             <Jumbotron>
               <h1>React Google Books Search</h1>
-              <h5>Search For and Save Books of Interest</h5>
+              <h5>Search & Save from Google Books API</h5>
             </Jumbotron>
           </div>
           <Col size="md-12">
@@ -63,6 +65,7 @@ function Search() {
               <Input
                 onChange={handleInputChange}
                 name="title"
+                style={{ textAlign: "center", width: 500, }}
                 placeholder='For example, "Catcher In The Rye"'
               />
               <FormBtn
