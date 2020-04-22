@@ -1,12 +1,13 @@
+  
 import React from "react";
-import "./style.css";
 
-// (..props) spread all of the passed props onto this element
+// The ...props means, spread all of the passed props onto this element
+// That way we don't have to define them all individually
 function DeleteBtn(props) {
   return (
-    <span className="delete-btn" {...props} role="button" tabIndex="0">
-      ✗
-    </span>
+    <button className="delete-btn btn btn-danger" tabIndex="0" onClick={() => props.handleDeleteSubmit(props.id)} style={{ float: "right", marginBottom: 10 }}>Delete <i className="fas fa-trash"></i>
+      {props.children}
+    </button>
   );
 }
 
