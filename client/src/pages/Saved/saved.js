@@ -36,12 +36,11 @@ function Search() {
           <div className="hero">
             <Jumbotron>
               <h1>React Google Books Search</h1>
-              <h5>Search For and Save Books of Interest</h5>
+              <h5>Searched & Saved Books of Interest</h5>
             </Jumbotron>
           </div>
           <Col size="md-12">
             <Card>
-              <h4 className="text-center">Saved Books</h4>
               {books.length >0? (
               <List> 
                 {books.map(book => (
